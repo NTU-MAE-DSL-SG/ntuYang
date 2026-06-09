@@ -1,172 +1,274 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>People | Design Sciences Laboratory</title>
-    <meta name="description" content="People directory for the Design Sciences Laboratory at Nanyang Technological University.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css?v=20260509-1142">
-  </head>
-  <body class="theme-ntuyang publication-theme-ntuyang people-directory-page">
-    <header class="site-header">
-      <nav class="nav" aria-label="Primary navigation">
-        <a class="brand" href="../index.html#home" aria-label="Design Sciences Laboratory home">
-          <span>Design Sciences Laboratory</span>
-        </a>
-        <div class="nav-links">
-          <a href="../index.html#research">Research</a>
-          <a href="personal.ntu.edu.sg_skmoon_people.html" aria-current="page">People</a>
-          <a href="../publications.html">Publications</a>
-          <a href="../index.html#contact">Contact</a>
-        </div>
-      </nav>
-    </header>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>People | Design Sciences Laboratory</title>
+<meta content="People directory for the Design Sciences Laboratory at Nanyang Technological University." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../styles.css?v=20260509-1142" rel="stylesheet"/>
 
-    <main class="publication-page people-directory-main">
-      <section class="page-hero people-directory-hero">
-        <p class="eyebrow">People</p>
-        <h1>Research group directory</h1>
-        <p>An academic directory of current lab members, organized by role and research position.</p>
-      </section>
+<style>
+      /* Hover link panel for people profile cards.
+         This is intentionally kept in-page so the feature works even before styles.css is updated. */
+      .profile-hover-card {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        color: inherit;
+        text-decoration: none;
+      }
 
-      <section class="publication-archive people-directory-archive" aria-label="People directory">
-        <section class="people-directory-section">
-          <header class="publication-year-header people-directory-header">
-            <h2>Principal Investigator</h2>
-            <span>1 profile</span>
-          </header>
-          <div class="entity-card-grid entity-card-grid-single">
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_MoonSeungKi.html">
-              <figure class="entity-card-media">
-                <img src="../images/cards/port_prof_moon_seung_ki.png" alt="Placeholder portrait for Assoc. Prof. Moon Seung Ki">
-              </figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">Principal Investigator</p>
-                <h3>Assoc. Prof. Moon Seung Ki</h3>
-                <p>School of Mechanical and Aerospace Engineering, Nanyang Technological University.</p>
-                <p class="entity-card-note">Research leadership in design science, manufacturing intelligence, and sustainable engineering systems.</p>
-              </div>
-            </a>
-          </div>
-        </section>
+      .profile-hover-card .entity-card-media,
+      .profile-hover-card .entity-card-body {
+        transition: transform 180ms ease, filter 180ms ease, opacity 180ms ease;
+      }
 
-        <section class="people-directory-section">
-          <header class="publication-year-header people-directory-header">
-            <h2>Current members</h2>
-            <span>Research roles and student researchers</span>
-          </header>
-          <div class="entity-card-grid">
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_Jeonsangjun.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-2.png" alt="Placeholder portrait for Jeon Sang Jun"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">Research Fellow</p>
-                <h3>Jeon Sang Jun</h3>
-                <p>Research in advanced manufacturing and intelligent engineering systems.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_ChuaZhongYang.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-3.png" alt="Placeholder portrait for Chua Zhong Yang"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">PhD Student</p>
-                <h3>Chua Zhong Yang</h3>
-                <p>Doctoral research in smart manufacturing, production systems, and data-driven engineering.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_TanYuEn.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-1.png" alt="Placeholder portrait for Tan Yu En"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">PhD Student</p>
-                <h3>Tan Yu En</h3>
-                <p>Research in design optimization and sustainable product-service systems.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_Katherinegao.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-2.png" alt="Placeholder portrait for Katherine Gao"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">PhD Student</p>
-                <h3>Katherine Gao</h3>
-                <p>Doctoral work on engineering intelligence, manufacturing systems, and digital methods.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_Nicholasng.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-3.png" alt="Placeholder portrait for Nicholas Ng"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">PhD Student</p>
-                <h3>Nicholas Ng</h3>
-                <p>Research in data-driven manufacturing and next-generation production platforms.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_Leejongsuk.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-1.png" alt="Placeholder portrait for Lee Jong Suk"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">PhD Student</p>
-                <h3>Lee Jong Suk</h3>
-                <p>Research spanning production intelligence and advanced industrial systems.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_Kimdonghui.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-2.png" alt="Placeholder portrait for Kim Dong Hui"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">Research Associate / MEng</p>
-                <h3>Kim Dong Hui</h3>
-                <p>Research and project support in engineering design and manufacturing implementation.</p>
-              </div>
-            </a>
-            <a class="entity-card entity-card-person" href="personal.ntu.edu.sg_skmoon_Winston.html">
-              <figure class="entity-card-media"><img src="../images/cards/person-placeholder-3.png" alt="Placeholder portrait for Winston Lim Wei Liang"></figure>
-              <div class="entity-card-body">
-                <p class="entity-card-meta">Research Associate / MEng</p>
-                <h3>Winston Lim Wei Liang</h3>
-                <p>Applied research in product development, systems engineering, and prototyping workflows.</p>
-              </div>
-            </a>
-          </div>
-        </section>
+      .profile-hover-card:hover .entity-card-media,
+      .profile-hover-card:focus-within .entity-card-media {
+        filter: saturate(0.85) brightness(0.72);
+      }
 
-        <section class="people-directory-section">
-          <header class="publication-year-header people-directory-header">
-            <h2>Alumni archive</h2>
-            <span>Past members and affiliated researchers</span>
-          </header>
-          <div class="pub-category people-category people-category-alumni">
-            <h3>Archive</h3>
-            <div class="people-link-grid alumni-grid">
-              <a href="personal.ntu.edu.sg_skmoon_BaekJungWoo.html">Baek Jung Woo</a>
-              <a href="personal.ntu.edu.sg_skmoon_AhnIlHyuk.html">Ahn Il Hyuk</a>
-              <a href="personal.ntu.edu.sg_skmoon_JiaoLishi.html">Jiao Lishi</a>
-              <a href="personal.ntu.edu.sg_skmoon_LiYuhua.html">Li Yu Hua</a>
-              <a href="personal.ntu.edu.sg_skmoon_Wangbing.html">Wang Bing</a>
-              <a href="personal.ntu.edu.sg_skmoon_Choijoonphil.html">Choi Joon Phil</a>
-              <a href="personal.ntu.edu.sg_skmoon_Parkseongje.html">Park Seong Je</a>
-              <a href="personal.ntu.edu.sg_skmoon_Jamie.html">Jamie Ng Suat Ling</a>
-              <a href="personal.ntu.edu.sg_skmoon_NingrongLei.html">Lei Ningrong</a>
-              <a href="personal.ntu.edu.sg_skmoon_SamyeonKim.html">Kim Samyeon</a>
-              <a href="personal.ntu.edu.sg_skmoon_YaoXiling.html">Yao Xiling</a>
-              <a href="personal.ntu.edu.sg_skmoon_Yogesh.html">Jayaraman Yogeshwaran</a>
-              <a href="personal.ntu.edu.sg_skmoon_WuFang.html">Wu Fang</a>
-              <a href="personal.ntu.edu.sg_skmoon_TruongNgocQuocThang.html">Truong Ngoc Quoc Thang</a>
-              <a href="personal.ntu.edu.sg_skmoon_HyunwoongKo.html">Ko Hyunwoong</a>
-              <a href="personal.ntu.edu.sg_skmoon_PassapornKanchanasri.html">Passaporn Kanchanasri</a>
-              <a href="personal.ntu.edu.sg_skmoon_SaccoEnea.html">Sacco Enea</a>
-              <a href="personal.ntu.edu.sg_skmoon_ZhangHaining.html">Zhang Haining</a>
-              <a href="personal.ntu.edu.sg_skmoon_ZhangYongjie.html">Zhang Yongjie</a>
-              <a href="personal.ntu.edu.sg_skmoon_Chuapingchong.html">Chua Ping Chong</a>
-              <a href="personal.ntu.edu.sg_skmoon_Jerin.html">Jerin Wesley R</a>
-              <a href="personal.ntu.edu.sg_skmoon_Limchehan.html">Lim Che Han</a>
-              <a href="personal.ntu.edu.sg_skmoon_Liubufan.html">Liu Bufan</a>
-              <a href="personal.ntu.edu.sg_skmoon_Leeguosheng.html">Lee Guo Sheng</a>
-              <a href="personal.ntu.edu.sg_skmoon_Chenlequn.html">Chen Lequn</a>
-            </div>
-          </div>
-        </section>
-      </section>
-    </main>
+      .profile-hover-card:hover .entity-card-body,
+      .profile-hover-card:focus-within .entity-card-body {
+        transform: translateY(-4px);
+      }
 
-    <footer class="footer">
-      <p>Copyright © Design Sciences Laboratory, Nanyang Technological University.</p>
-    </footer>
-  </body>
+      .profile-hover-actions {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.8rem;
+        padding: 1.15rem;
+        background: linear-gradient(135deg, rgba(10, 22, 40, 0.88), rgba(21, 54, 88, 0.78));
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease;
+      }
+
+      .profile-hover-card:hover .profile-hover-actions,
+      .profile-hover-card:focus-within .profile-hover-actions {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .profile-hover-title {
+        margin: 0;
+        color: #ffffff;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .profile-hover-link-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .profile-hover-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.25rem;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 999px;
+        padding: 0.45rem 0.7rem;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-decoration: none;
+        backdrop-filter: blur(8px);
+        transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+      }
+
+      .profile-hover-link:hover,
+      .profile-hover-link:focus-visible {
+        background: rgba(255, 255, 255, 0.24);
+        border-color: rgba(255, 255, 255, 0.9);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .profile-hover-card:focus-within {
+        outline: 3px solid rgba(67, 139, 255, 0.45);
+        outline-offset: 4px;
+      }
+
+      @media (hover: none) {
+        .profile-hover-actions {
+          position: static;
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+          background: linear-gradient(135deg, rgba(18, 37, 66, 0.95), rgba(34, 75, 114, 0.95));
+        }
+      }
+    </style>
+</head>
+<body class="theme-ntuyang publication-theme-ntuyang people-directory-page">
+<header class="site-header">
+<nav aria-label="Primary navigation" class="nav">
+<a aria-label="Design Sciences Laboratory home" class="brand" href="../index.html#home">
+<span>Design Sciences Laboratory</span>
+</a>
+<div class="nav-links">
+<a href="../index.html#research">Research</a>
+<a aria-current="page" href="personal.ntu.edu.sg_skmoon_people.html">People</a>
+<a href="../publications.html">Publications</a>
+<a href="../index.html#contact">Contact</a>
+</div>
+</nav>
+</header>
+<main class="publication-page people-directory-main">
+<section class="page-hero people-directory-hero">
+<p class="eyebrow">People</p>
+<h1>Research group directory</h1>
+<p>An academic directory of current lab members, organized by role and research position.</p>
+</section>
+<section aria-label="People directory" class="publication-archive people-directory-archive">
+<section class="people-directory-section">
+<header class="publication-year-header people-directory-header">
+<h2>Principal Investigator</h2>
+<span>1 profile</span>
+</header>
+<div class="entity-card-grid entity-card-grid-single">
+<article aria-label="Profile links for Assoc. Prof. Moon Seung Ki" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media">
+<img alt="Placeholder portrait for Assoc. Prof. Moon Seung Ki" src="../images/cards/port_prof_moon_seung_ki.png"/>
+</figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">Principal Investigator</p>
+<h3>Assoc. Prof. Moon Seung Ki</h3>
+<p>School of Mechanical and Aerospace Engineering, Nanyang Technological University.</p>
+<p class="entity-card-note">Research leadership in design science, manufacturing intelligence, and sustainable engineering systems.</p>
+</div>
+<div aria-label="Links for Assoc. Prof. Moon Seung Ki" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_MoonSeungKi.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Assoc.+Prof.+Moon+Seung+Ki+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Assoc.+Prof.+Moon+Seung+Ki&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Assoc.+Prof.+Moon+Seung+Ki+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+</div>
+</section>
+<section class="people-directory-section">
+<header class="publication-year-header people-directory-header">
+<h2>Current members</h2>
+<span>Research roles and student researchers</span>
+</header>
+<div class="entity-card-grid">
+<article aria-label="Profile links for Jeon Sang Jun" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Jeon Sang Jun" src="../images/cards/person-placeholder-2.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">Research Fellow</p>
+<h3>Jeon Sang Jun</h3>
+<p>Research in advanced manufacturing and intelligent engineering systems.</p>
+</div>
+<div aria-label="Links for Jeon Sang Jun" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_Jeonsangjun.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Jeon+Sang+Jun+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Jeon+Sang+Jun&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Jeon+Sang+Jun+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Chua Zhong Yang" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Chua Zhong Yang" src="../images/cards/person-placeholder-3.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">PhD Student</p>
+<h3>Chua Zhong Yang</h3>
+<p>Doctoral research in smart manufacturing, production systems, and data-driven engineering.</p>
+</div>
+<div aria-label="Links for Chua Zhong Yang" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_ChuaZhongYang.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Chua+Zhong+Yang+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Chua+Zhong+Yang&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Chua+Zhong+Yang+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Tan Yu En" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Tan Yu En" src="../images/cards/person-placeholder-1.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">PhD Student</p>
+<h3>Tan Yu En</h3>
+<p>Research in design optimization and sustainable product-service systems.</p>
+</div>
+<div aria-label="Links for Tan Yu En" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_TanYuEn.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Tan+Yu+En+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Tan+Yu+En&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Tan+Yu+En+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Katherine Gao" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Katherine Gao" src="../images/cards/person-placeholder-2.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">PhD Student</p>
+<h3>Katherine Gao</h3>
+<p>Doctoral work on engineering intelligence, manufacturing systems, and digital methods.</p>
+</div>
+<div aria-label="Links for Katherine Gao" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_Katherinegao.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Katherine+Gao+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Katherine+Gao&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Katherine+Gao+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Nicholas Ng" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Nicholas Ng" src="../images/cards/person-placeholder-3.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">PhD Student</p>
+<h3>Nicholas Ng</h3>
+<p>Research in data-driven manufacturing and next-generation production platforms.</p>
+</div>
+<div aria-label="Links for Nicholas Ng" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_Nicholasng.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Nicholas+Ng+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Nicholas+Ng&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Nicholas+Ng+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Lee Jong Suk" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Lee Jong Suk" src="../images/cards/person-placeholder-1.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">PhD Student</p>
+<h3>Lee Jong Suk</h3>
+<p>Research spanning production intelligence and advanced industrial systems.</p>
+</div>
+<div aria-label="Links for Lee Jong Suk" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_Leejongsuk.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Lee+Jong+Suk+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Lee+Jong+Suk&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Lee+Jong+Suk+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Kim Dong Hui" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Kim Dong Hui" src="../images/cards/person-placeholder-2.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">Research Associate / MEng</p>
+<h3>Kim Dong Hui</h3>
+<p>Research and project support in engineering design and manufacturing implementation.</p>
+</div>
+<div aria-label="Links for Kim Dong Hui" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_Kimdonghui.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Kim+Dong+Hui+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Kim+Dong+Hui&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Kim+Dong+Hui+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+<article aria-label="Profile links for Winston Lim Wei Liang" class="entity-card entity-card-person profile-hover-card" tabindex="0">
+<figure class="entity-card-media"><img alt="Placeholder portrait for Winston Lim Wei Liang" src="../images/cards/person-placeholder-3.png"/></figure>
+<div class="entity-card-body">
+<p class="entity-card-meta">Research Associate / MEng</p>
+<h3>Winston Lim Wei Liang</h3>
+<p>Applied research in product development, systems engineering, and prototyping workflows.</p>
+</div>
+<div aria-label="Links for Winston Lim Wei Liang" class="profile-hover-actions"><p class="profile-hover-title">Contact &amp; Links</p><div class="profile-hover-link-grid"><a class="profile-hover-link" href="personal.ntu.edu.sg_skmoon_Winston.html">Profile</a><a class="profile-hover-link" href="https://scholar.google.com/scholar?q=Winston+Lim+Wei+Liang+NTU" rel="noopener noreferrer" target="_blank">Scholar</a><a class="profile-hover-link" href="https://github.com/search?q=Winston+Lim+Wei+Liang&amp;type=users" rel="noopener noreferrer" target="_blank">GitHub</a><a class="profile-hover-link" href="https://www.google.com/search?q=Winston+Lim+Wei+Liang+NTU+LinkedIn" rel="noopener noreferrer" target="_blank">LinkedIn</a></div></div></article>
+</div>
+</section>
+<section class="people-directory-section">
+<header class="publication-year-header people-directory-header">
+<h2>Alumni archive</h2>
+<span>Past members and affiliated researchers</span>
+</header>
+<div class="pub-category people-category people-category-alumni">
+<h3>Archive</h3>
+<div class="people-link-grid alumni-grid">
+<a href="personal.ntu.edu.sg_skmoon_BaekJungWoo.html">Baek Jung Woo</a>
+<a href="personal.ntu.edu.sg_skmoon_AhnIlHyuk.html">Ahn Il Hyuk</a>
+<a href="personal.ntu.edu.sg_skmoon_JiaoLishi.html">Jiao Lishi</a>
+<a href="personal.ntu.edu.sg_skmoon_LiYuhua.html">Li Yu Hua</a>
+<a href="personal.ntu.edu.sg_skmoon_Wangbing.html">Wang Bing</a>
+<a href="personal.ntu.edu.sg_skmoon_Choijoonphil.html">Choi Joon Phil</a>
+<a href="personal.ntu.edu.sg_skmoon_Parkseongje.html">Park Seong Je</a>
+<a href="personal.ntu.edu.sg_skmoon_Jamie.html">Jamie Ng Suat Ling</a>
+<a href="personal.ntu.edu.sg_skmoon_NingrongLei.html">Lei Ningrong</a>
+<a href="personal.ntu.edu.sg_skmoon_SamyeonKim.html">Kim Samyeon</a>
+<a href="personal.ntu.edu.sg_skmoon_YaoXiling.html">Yao Xiling</a>
+<a href="personal.ntu.edu.sg_skmoon_Yogesh.html">Jayaraman Yogeshwaran</a>
+<a href="personal.ntu.edu.sg_skmoon_WuFang.html">Wu Fang</a>
+<a href="personal.ntu.edu.sg_skmoon_TruongNgocQuocThang.html">Truong Ngoc Quoc Thang</a>
+<a href="personal.ntu.edu.sg_skmoon_HyunwoongKo.html">Ko Hyunwoong</a>
+<a href="personal.ntu.edu.sg_skmoon_PassapornKanchanasri.html">Passaporn Kanchanasri</a>
+<a href="personal.ntu.edu.sg_skmoon_SaccoEnea.html">Sacco Enea</a>
+<a href="personal.ntu.edu.sg_skmoon_ZhangHaining.html">Zhang Haining</a>
+<a href="personal.ntu.edu.sg_skmoon_ZhangYongjie.html">Zhang Yongjie</a>
+<a href="personal.ntu.edu.sg_skmoon_Chuapingchong.html">Chua Ping Chong</a>
+<a href="personal.ntu.edu.sg_skmoon_Jerin.html">Jerin Wesley R</a>
+<a href="personal.ntu.edu.sg_skmoon_Limchehan.html">Lim Che Han</a>
+<a href="personal.ntu.edu.sg_skmoon_Liubufan.html">Liu Bufan</a>
+<a href="personal.ntu.edu.sg_skmoon_Leeguosheng.html">Lee Guo Sheng</a>
+<a href="personal.ntu.edu.sg_skmoon_Chenlequn.html">Chen Lequn</a>
+</div>
+</div>
+</section>
+</section>
+</main>
+<footer class="footer">
+<p>Copyright © Design Sciences Laboratory, Nanyang Technological University.</p>
+</footer>
+</body>
 </html>
