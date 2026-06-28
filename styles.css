@@ -3269,3 +3269,54 @@ address {
     font-size: 18px;
   }
 }
+
+/* People page: 4 cards per row on desktop */
+.people-directory-page .entity-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* Keep PI card smaller / single-column */
+.people-directory-page .entity-card-grid-single {
+  grid-template-columns: minmax(0, 320px);
+}
+
+/* Reduce card visual size */
+.people-directory-page .entity-card-body {
+  padding: 18px;
+}
+
+.people-directory-page .entity-card-media {
+  aspect-ratio: 4 / 3;
+}
+
+.people-directory-page .entity-card-body h3 {
+  font-size: 1rem;
+}
+
+.people-directory-page .entity-card-body p {
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .people-directory-page .entity-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .people-directory-page .entity-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Small mobile */
+@media (max-width: 520px) {
+  .people-directory-page .entity-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
