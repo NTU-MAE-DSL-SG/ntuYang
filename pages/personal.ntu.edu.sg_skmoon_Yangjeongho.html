@@ -10,39 +10,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css?v=20260509-1242">
     <style>
-  /* Make the profile portrait larger and easier to see. */
-  .profile-contact {
-    min-width: min(100%, 320px);
-  }
+.profile-contact {
+  width: min(100%, 420px);
+  min-width: 0;
+  box-sizing: border-box;
+}
 
-  .profile-card-image {
-    width: clamp(220px, 26vw, 340px);
-    aspect-ratio: 4 / 5;
-    margin: 0 auto 1.25rem;
-    overflow: hidden;
-    border-radius: 16px;
-    background: #f3f4f6;
+.profile-card-image {
+  width: 100%;
+  height: auto;
+  margin: 0 auto 2rem;
+  padding: 16px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    box-sizing: border-box;
-  }
+  background: #f3f4f6;
+  border-radius: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  .profile-card-image img {
-    display: block;
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
-    object-fit: contain;
-  }
+.profile-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
 
-  @media (max-width: 760px) {
-    .profile-card-image {
-      width: min(78vw, 320px);
-    }
-  }
+  object-fit: contain;
+  border-radius: 0;
+}
   </style>
   </head>
   <body class="theme-ntuyang publication-theme-ntuyang profile-page-shell">
