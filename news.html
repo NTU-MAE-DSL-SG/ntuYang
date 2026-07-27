@@ -1,47 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>News | Design Sciences Laboratory</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>News | Design Sciences Laboratory</title>
+    <meta name="description" content="News, research highlights, events, and laboratory updates from the Design Sciences Laboratory at Nanyang Technological University.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260727-01">
+    <style>
+      .news-page {
+        background: var(--surface);
+      }
 
-<body>
-  <header>
-    <a href="index.html">Design Sciences Laboratory</a>
+      .news-archive {
+        width: min(100% - 40px, var(--max));
+        margin: 0 auto;
+        padding: 50px 0 84px;
+      }
 
-    <nav>
-      <a href="index.html#research">Research</a>
-      <a href="index.html#people">People</a>
-      <a href="publications.html">Publications</a>
-      <a href="news.html">News</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </header>
+      .news-page .news-list {
+        gap: 18px;
+      }
 
-  <main>
-    <section class="section">
-      <p class="eyebrow">News</p>
-      <h1>Lab news and updates</h1>
-      <p>
-        Recent announcements, research highlights, publications, events, and lab activities.
-      </p>
+      .news-page .news-list article {
+        grid-template-columns: 150px minmax(0, 1fr);
+        padding: 28px;
+        border-radius: 14px;
+        border-color: rgba(23, 32, 42, 0.09);
+        background: #ffffff;
+      }
 
-      <div class="news-list">
-        <article class="news-item">
-          <p class="news-date">June 2026</p>
-          <h2>News title here</h2>
-          <p>
-            Add a short description of the news item here.
-          </p>
-        </article>
-      </div>
-    </section>
-  </main>
+      .news-page .news-list time {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        align-self: start;
+        padding-top: 4px;
+      }
 
-  <footer>
-    Copyright © Design Sciences Laboratory, Nanyang Technological University.
-  </footer>
-</body>
+      .news-page .news-list h3,
+      .news-page .news-list p {
+        grid-column: 2;
+      }
+
+      .news-page .news-list h3 {
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(1.2rem, 2vw, 1.55rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .news-page .news-list p {
+        margin-top: 10px;
+      }
+
+      @media (max-width: 720px) {
+        .news-page .news-list article {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .news-page .news-list time,
+        .news-page .news-list h3,
+        .news-page .news-list p {
+          grid-column: 1;
+          grid-row: auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="theme-ntuyang publication-theme-ntuyang">
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html#home" aria-label="Design Sciences Laboratory home">
+          <span>Design Sciences Laboratory</span>
+        </a>
+        <div class="nav-links">
+          <a href="news.html" aria-current="page">News</a>
+          <a href="index.html#research">Research</a>
+          <a href="pages/personal.ntu.edu.sg_skmoon_people.html">People</a>
+          <a href="publications.html">Publications</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="news-page">
+      <section class="page-hero ntuyang-publication-hero">
+        <p class="eyebrow">News</p>
+        <h1>Lab news and updates</h1>
+        <p>Recent announcements, research highlights, publications, events, and laboratory activities.</p>
+      </section>
+
+      <section class="news-archive" aria-label="Laboratory news">
+        <div class="news-list">
+          <article>
+            <time datetime="2026-06">June 2026</time>
+            <h3>News title here</h3>
+            <p>Add a short description of the news item here.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Copyright © Design Sciences Laboratory, Nanyang Technological University.</p>
+    </footer>
+  </body>
 </html>
