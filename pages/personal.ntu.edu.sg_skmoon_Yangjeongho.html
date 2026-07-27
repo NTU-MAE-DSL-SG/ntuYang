@@ -9,6 +9,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css?v=20260509-1242">
+    <style>
+  /* Make the profile portrait larger and easier to see. */
+  .profile-contact {
+    min-width: min(100%, 320px);
+  }
+
+  .profile-card-image {
+    width: clamp(220px, 26vw, 340px);
+    aspect-ratio: 4 / 5;
+    margin: 0 auto 1.25rem;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #f3f4f6;
+  }
+
+  .profile-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+  }
+
+  @media (max-width: 760px) {
+    .profile-card-image {
+      width: min(78vw, 320px);
+    }
+  }
+  </style>
   </head>
   <body class="theme-ntuyang publication-theme-ntuyang profile-page-shell">
     <header class="site-header">
