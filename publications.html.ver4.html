@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Publications | Design Sciences Laboratory</title>
+    <meta name="description" content="Publication archive for the Design Sciences Laboratory at Nanyang Technological University.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260509-1142">
+    <style>
+      /* Publication list layout inspired by cmustrudel.github.io/publications/
+         This replaces the old image-card grid with long, text-focused entries. */
+      .ntuyang-publication-archive {
+        max-width: 980px;
+      }
+
+      .publication-list {
+        display: grid;
+        gap: 1.35rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .publication-entry {
+        display: grid;
+        grid-template-columns: 7.5rem minmax(0, 1fr);
+        gap: 1.35rem;
+        padding: 1.45rem 0;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+      }
+
+      .publication-entry:first-child {
+        border-top: 1px solid rgba(15, 23, 42, 0.12);
+      }
+
+      .publication-venue-tag {
+        align-self: start;
+        display: inline-flex;
+        justify-content: center;
+        min-width: 5.8rem;
+        padding: 0.45rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(16, 86, 82, 0.1);
+        color: #0f5751;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .publication-content {
+        min-width: 0;
+      }
+
+      .publication-title {
+        margin: 0;
+        color: #0f172a;
+        font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .publication-authors {
+        margin: 0.6rem 0 0;
+        color: #334155;
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      .publication-authors strong {
+        color: #0f172a;
+        font-weight: 700;
+      }
+
+      .publication-citation {
+        margin: 0.45rem 0 0;
+        color: #475569;
+        font-size: 0.96rem;
+        line-height: 1.65;
+      }
+
+      .publication-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 0.85rem;
+      }
+
+      .publication-links a,
+      .publication-links button,
+      .publication-links summary {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2rem;
+        border: 1px solid rgba(15, 23, 42, 0.15);
+        border-radius: 999px;
+        padding: 0.35rem 0.75rem;
+        background: #ffffff;
+        color: #0f5751;
+        font: inherit;
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      }
+
+      .publication-links a:hover,
+      .publication-links summary:hover {
+        transform: translateY(-1px);
+        border-color: rgba(16, 86, 82, 0.35);
+        background: rgba(16, 86, 82, 0.06);
+      }
+
+      .publication-bibtex {
+        margin-top: 0.85rem;
+      }
+
+      .publication-bibtex summary {
+        width: max-content;
+        list-style: none;
+      }
+
+      .publication-bibtex summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .publication-bibtex pre {
+        margin: 0.75rem 0 0;
+        padding: 1rem;
+        overflow-x: auto;
+        border-radius: 1rem;
+        background: #0f172a;
+        color: #e2e8f0;
+        font-size: 0.84rem;
+        line-height: 1.55;
+      }
+
+      .publication-year-header {
+        margin-top: 2.2rem;
+      }
+
+      .publication-year:first-of-type .publication-year-header {
+        margin-top: 0;
+      }
+
+      .year-nav.ntuyang-year-nav {
+        position: sticky;
+        top: 4.2rem;
+        z-index: 2;
+        margin-bottom: 2.2rem;
+        backdrop-filter: blur(12px);
+      }
+
+      .archive-text-block {
+        margin-top: 1rem;
+        padding: 1.25rem 1.35rem;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 1.25rem;
+        background: rgba(248, 250, 252, 0.8);
+        color: #475569;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 720px) {
+        .publication-entry {
+          grid-template-columns: 1fr;
+          gap: 0.8rem;
+        }
+
+        .publication-venue-tag {
+          justify-self: start;
+        }
+      }
+
+      /* Fix: keep each publication as a normal full-width text block.
+         This prevents inherited card/link styles from squeezing titles and buttons. */
+      .ntuyang-publication-archive .publication-entry {
+        display: grid !important;
+        grid-template-columns: 7.5rem minmax(0, 1fr) !important;
+        align-items: start !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      .ntuyang-publication-archive .publication-content {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      .ntuyang-publication-archive .publication-title,
+      .ntuyang-publication-archive .publication-authors,
+      .ntuyang-publication-archive .publication-citation {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+        white-space: normal !important;
+      }
+
+      .ntuyang-publication-archive .publication-title {
+        margin: 0 !important;
+      }
+
+      .ntuyang-publication-archive .publication-authors {
+        margin-top: 0.6rem !important;
+      }
+
+      .ntuyang-publication-archive .publication-citation {
+        margin-top: 0.45rem !important;
+      }
+
+      .ntuyang-publication-archive .publication-links {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: 0.55rem !important;
+        width: auto !important;
+        max-width: none !important;
+      }
+
+      .ntuyang-publication-archive .publication-links a,
+      .ntuyang-publication-archive .publication-links summary {
+        width: auto !important;
+        height: auto !important;
+        min-width: 0 !important;
+        min-height: 2rem !important;
+        padding: 0.35rem 0.75rem !important;
+        line-height: 1.2 !important;
+        writing-mode: horizontal-tb !important;
+      }
+
+      @media (max-width: 720px) {
+        .ntuyang-publication-archive .publication-entry {
+          grid-template-columns: 1fr !important;
+        }
+      }
+
+
+      /* Remove publication block/card border inherited from global styles */
+      .ntuyang-publication-archive .publication-entry {
+        border-top: none !important;
+        border-bottom: none !important;
+      }
+
+      .ntuyang-publication-archive .publication-entry:first-child {
+        border-top: none !important;
+      }
+
+      .ntuyang-publication-archive .publication-content {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        outline: none !important;
+      }
+
+    </style>
+  </head>
+  <body class="theme-ntuyang publication-theme-ntuyang">
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="index.html#home" aria-label="Design Sciences Laboratory home">
+          <span>Design Sciences Laboratory</span>
+        </a>
+        <div class="nav-links">
+          <a href="news.html">News</a>
+          <a href="index.html#research">Research</a>
+          <a href="pages/personal.ntu.edu.sg_skmoon_people.html">People</a>
+          <a href="publications.html" aria-current="page">Publications</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="publication-page ntuyang-publication-page">
+      <section class="page-hero ntuyang-publication-hero">
+        <p class="eyebrow">Publications</p>
+        <h1>Publication archive</h1>
+        <p>An academic archive organized by year and publication type. The list format is optimized for scanning full citation information, links, and BibTeX records.</p>
+      </section>
+
+      <section class="publication-archive ntuyang-publication-archive" aria-label="Full publication list">
+        <nav class="year-nav ntuyang-year-nav" aria-label="Publication years">
+          <a href="#2025">Latest</a>
+          <a href="#2024">2024</a>
+          <a href="#archive">Earlier archive</a>
+        </nav>
+
+        <section class="publication-year" id="2025">
+          <header class="publication-year-header">
+            <h2>2025</h2>
+            <span>Selected recent work</span>
+          </header>
+
+          <ol class="publication-list">
+            <li class="publication-entry">
+              <div class="publication-venue-tag">JCISE 2025</div>
+              <article class="publication-content">
+                <h3 class="publication-title">Leveraging Vision-Language Models for Manufacturing Feature Recognition in CAD Designs.</h3>
+                <p class="publication-authors">Khan, M.T., Chen, L., Ng, Y.H., Feng, W., Tan, N.Y.J., and <strong>Moon, S.K.</strong></p>
+                <p class="publication-citation">ASME Journal of Computing and Information Science in Engineering, 2025.</p>
+                <div class="publication-links" aria-label="Publication links">
+                  <a href="#" aria-label="DOI link placeholder for Leveraging Vision-Language Models for Manufacturing Feature Recognition in CAD Designs">DOI</a>
+                  <a href="https://arxiv.org/pdf/2411.02810" aria-label="PDF link placeholder for Leveraging Vision-Language Models for Manufacturing Feature Recognition in CAD Designs">PDF</a>
+                </div>
+                <details class="publication-bibtex publication-links">
+                  <summary>BibTeX</summary>
+                  <pre><code>@article{khan2025vlm_cad,
+  title = {Leveraging Vision-Language Models for Manufacturing Feature Recognition in CAD Designs},
+  author = {Khan, M.T. and Chen, L. and Ng, Y.H. and Feng, W. and Tan, N.Y.J. and Moon, S.K.},
+  journal = {ASME Journal of Computing and Information Science in Engineering},
+  year = {2025}
+}</code></pre>
+                </details>
+              </article>
+            </li>
+
+            <li class="publication-entry">
+              <div class="publication-venue-tag">IJPEM-ST 2025</div>
+              <article class="publication-content">
+                <h3 class="publication-title">Software-Defined Factory: Paradigm Shift in Manufacturing Towards Industry 5.0.</h3>
+                <p class="publication-authors">Kim, J., Lee, J.*, Park, S.J., Lee, J., Song, B., and <strong>Moon, S.K.</strong></p>
+                <p class="publication-citation">International Journal of Precision Engineering and Manufacturing - Smart Technology, 2025.</p>
+                <div class="publication-links" aria-label="Publication links">
+                  <a href="#" aria-label="DOI link placeholder for Software-Defined Factory">DOI</a>
+                  <a href="#" aria-label="PDF link placeholder for Software-Defined Factory">PDF</a>
+                </div>
+                <details class="publication-bibtex publication-links">
+                  <summary>BibTeX</summary>
+                  <pre><code>@article{kim2025software_defined_factory,
+  title = {Software-Defined Factory: Paradigm Shift in Manufacturing Towards Industry 5.0},
+  author = {Kim, J. and Lee, J. and Park, S.J. and Lee, J. and Song, B. and Moon, S.K.},
+  journal = {International Journal of Precision Engineering and Manufacturing - Smart Technology},
+  year = {2025}
+}</code></pre>
+                </details>
+              </article>
+            </li>
+
+            <li class="publication-entry">
+              <div class="publication-venue-tag">VPP 2025</div>
+              <article class="publication-content">
+                <h3 class="publication-title">Autonomous printing process optimisation and in-situ anomaly detection in fused deposition modelling.</h3>
+                <p class="publication-authors">Zhang, H., Yu, Y., Liu, X., Liang, N., Kim, Y., Shin, D., <strong>Moon, S.K.</strong>, and Choi, J.P.</p>
+                <p class="publication-citation">Virtual and Physical Prototyping, 2025.</p>
+                <div class="publication-links" aria-label="Publication links">
+                  <a href="#" aria-label="DOI link placeholder for Autonomous printing process optimisation">DOI</a>
+                  <a href="#" aria-label="PDF link placeholder for Autonomous printing process optimisation">PDF</a>
+                </div>
+                <details class="publication-bibtex publication-links">
+                  <summary>BibTeX</summary>
+                  <pre><code>@article{zhang2025autonomous_fdm,
+  title = {Autonomous printing process optimisation and in-situ anomaly detection in fused deposition modelling},
+  author = {Zhang, H. and Yu, Y. and Liu, X. and Liang, N. and Kim, Y. and Shin, D. and Moon, S.K. and Choi, J.P.},
+  journal = {Virtual and Physical Prototyping},
+  year = {2025}
+}</code></pre>
+                </details>
+              </article>
+            </li>
+          </ol>
+        </section>
+
+        <section class="publication-year" id="2024">
+          <header class="publication-year-header">
+            <h2>2024</h2>
+            <span>Selected archive</span>
+          </header>
+
+          <ol class="publication-list">
+            <li class="publication-entry">
+              <div class="publication-venue-tag">JIM 2024</div>
+              <article class="publication-content">
+                <h3 class="publication-title">A digital twin emulator for production performance prediction and optimization using multi-scale ensemble and surrogate models.</h3>
+                <p class="publication-authors">Liu, B., Chua, P., Lee, J.*, <strong>Moon, S.K.</strong>, and Lopez, M.</p>
+                <p class="publication-citation">Journal of Intelligent Manufacturing, 2024.</p>
+                <div class="publication-links" aria-label="Publication links">
+                  <a href="#" aria-label="DOI link placeholder for digital twin emulator publication">DOI</a>
+                  <a href="#" aria-label="PDF link placeholder for digital twin emulator publication">PDF</a>
+                </div>
+                <details class="publication-bibtex publication-links">
+                  <summary>BibTeX</summary>
+                  <pre><code>@article{liu2024digital_twin_emulator,
+  title = {A digital twin emulator for production performance prediction and optimization using multi-scale ensemble and surrogate models},
+  author = {Liu, B. and Chua, P. and Lee, J. and Moon, S.K. and Lopez, M.},
+  journal = {Journal of Intelligent Manufacturing},
+  year = {2024}
+}</code></pre>
+                </details>
+              </article>
+            </li>
+
+            <li class="publication-entry">
+              <div class="publication-venue-tag">JMS 2024</div>
+              <article class="publication-content">
+                <h3 class="publication-title">In-situ process monitoring and adaptive quality enhancement in laser additive manufacturing: a critical review.</h3>
+                <p class="publication-authors">Chen, L., Bi, G., Yao, X., Su, J., Tan, C., Feng, W., Benakis, M., Chew, Y., and <strong>Moon, S.K.</strong></p>
+                <p class="publication-citation">Journal of Manufacturing Systems, 2024.</p>
+                <div class="publication-links" aria-label="Publication links">
+                  <a href="#" aria-label="DOI link placeholder for laser additive manufacturing review">DOI</a>
+                  <a href="#" aria-label="PDF link placeholder for laser additive manufacturing review">PDF</a>
+                </div>
+                <details class="publication-bibtex publication-links">
+                  <summary>BibTeX</summary>
+                  <pre><code>@article{chen2024laser_am_review,
+  title = {In-situ process monitoring and adaptive quality enhancement in laser additive manufacturing: a critical review},
+  author = {Chen, L. and Bi, G. and Yao, X. and Su, J. and Tan, C. and Feng, W. and Benakis, M. and Chew, Y. and Moon, S.K.},
+  journal = {Journal of Manufacturing Systems},
+  year = {2024}
+}</code></pre>
+                </details>
+              </article>
+            </li>
+          </ol>
+        </section>
+
+        <section class="publication-year" id="archive">
+          <header class="publication-year-header">
+            <h2>Earlier archive</h2>
+            <span>Structured historical access</span>
+          </header>
+          <div class="archive-text-block">
+            <p>Publication records for earlier years remain available through the original laboratory archive and can be restored in the same long-list format when the complete historical records are added.</p>
+            <p>This page now avoids the previous card-based layout and presents publications as detailed citation entries with venue tags, author lines, publication venue information, external-link placeholders, and expandable BibTeX blocks.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Copyright © Design Sciences Laboratory, Nanyang Technological University.</p>
+    </footer>
+  </body>
+</html>
