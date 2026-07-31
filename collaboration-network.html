@@ -1,0 +1,1192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DSL Collaboration Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17212b;
+        --muted: #64748b;
+        --line: #d8e0e8;
+        --soft: #f4f7fa;
+        --paper: #ffffff;
+        --blue: #2f4b7c;
+        --teal: #168c7c;
+        --gold: #b58a2a;
+        --rose: #c45a4a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: #f7f9fb;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.94);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .nav {
+        align-items: center;
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 1240px;
+        padding: 16px 24px;
+      }
+
+      .brand {
+        color: var(--ink);
+        font-weight: 800;
+        letter-spacing: 0;
+        text-decoration: none;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      nav a {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      nav a[aria-current="page"] {
+        color: var(--blue);
+      }
+
+      main {
+        margin: 0 auto;
+        max-width: 1240px;
+        padding: 28px 24px 48px;
+      }
+
+      .intro {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
+        margin-bottom: 22px;
+      }
+
+      h1 {
+        font-size: clamp(34px, 5vw, 62px);
+        line-height: 1.02;
+        margin: 0 0 14px;
+        max-width: 850px;
+      }
+
+      .intro p {
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.65;
+        margin: 0;
+        max-width: 780px;
+      }
+
+      .stats {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stat {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 24px;
+        line-height: 1.1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 5px;
+        text-transform: uppercase;
+      }
+
+      .toolbar {
+        align-items: center;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        padding: 12px;
+      }
+
+      .mode-control {
+        display: flex;
+        gap: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        width: 100%;
+      }
+
+      .mode-control button {
+        background: #f8fafc;
+        border: 0;
+        border-radius: 0;
+        color: #475569;
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 46px;
+        padding: 0 14px;
+        position: relative;
+        transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+      }
+
+      .mode-control button + button {
+        border-left: 1px solid var(--line);
+      }
+
+      .mode-control button:hover {
+        background: #eef5f7;
+        color: var(--ink);
+      }
+
+      .mode-control button[aria-pressed="true"] {
+        background: var(--blue);
+        box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.55);
+        color: #fff;
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .search-row {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: minmax(220px, 1fr) 170px;
+        width: 100%;
+      }
+
+      .filter-row button {
+        flex: 0 0 auto;
+      }
+
+      .filter-row::before {
+        align-self: center;
+        color: var(--muted);
+        content: "Focus";
+        font-size: 12px;
+        font-weight: 800;
+        margin-right: 2px;
+        text-transform: uppercase;
+      }
+
+      button,
+      input,
+      select {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        font: inherit;
+        min-height: 38px;
+      }
+
+      button {
+        background: #fff;
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 0 12px;
+      }
+
+      button[aria-pressed="true"] {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fff;
+      }
+
+      input,
+      select {
+        background: #fff;
+        color: var(--ink);
+        padding: 0 12px;
+        width: 100%;
+      }
+
+      .network-shell {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        min-height: 720px;
+        overflow: hidden;
+      }
+
+      .canvas-wrap {
+        min-height: 720px;
+        position: relative;
+      }
+
+      .zoom-controls {
+        display: flex;
+        gap: 6px;
+        left: 18px;
+        position: absolute;
+        top: 18px;
+        z-index: 3;
+      }
+
+      .zoom-controls button {
+        background: rgba(255, 255, 255, 0.92);
+        border-color: var(--line);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        height: 34px;
+        padding: 0 10px;
+      }
+
+      .zoom-controls button:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+
+      svg {
+        display: block;
+        height: 720px;
+        touch-action: none;
+        width: 100%;
+      }
+
+      .details {
+        border-left: 1px solid var(--line);
+        background: #fbfcfe;
+        display: flex;
+        flex-direction: column;
+        height: 720px;
+        max-height: 720px;
+        overflow: hidden;
+        padding: 0;
+        scrollbar-gutter: stable;
+      }
+
+      .details h2 {
+        font-size: 20px;
+        margin: 0 0 10px;
+      }
+
+      #detail-content {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 18px;
+      }
+
+      .details p {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+        margin: 8px 0;
+      }
+
+      .details a {
+        color: var(--blue);
+        overflow-wrap: anywhere;
+      }
+
+      .publication-detail-list {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 10px;
+        list-style: none;
+        margin: 14px 0 0;
+        padding: 14px 0 0;
+      }
+
+      .publication-detail-list a {
+        color: var(--ink);
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.35;
+        text-decoration: none;
+      }
+
+      .publication-detail-list a:hover {
+        color: var(--blue);
+        text-decoration: underline;
+      }
+
+      .publication-detail-list .publication-title {
+        color: var(--ink);
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.35;
+      }
+
+      .publication-detail-list span {
+        color: var(--muted);
+        display: block;
+        font-size: 12px;
+        line-height: 1.35;
+        margin-top: 3px;
+      }
+
+      .publication-detail-list .publication-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px;
+      }
+
+      .publication-detail-list .publication-links a {
+        color: var(--blue);
+        display: inline-flex;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+        text-decoration: none;
+      }
+
+      .author-detail-list {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 8px;
+        list-style: none;
+        margin: 14px 0 0;
+        padding: 14px 0 0;
+      }
+
+      .author-detail-list button,
+      .author-detail-list a {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        color: var(--ink);
+        display: block;
+        height: auto;
+        line-height: 1.3;
+        min-height: 0;
+        padding: 9px 10px;
+        text-align: left;
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .author-detail-list button:hover,
+      .author-detail-list a:hover {
+        border-color: var(--blue);
+        color: var(--blue);
+      }
+
+      .author-detail-list span {
+        color: var(--muted);
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 3px;
+      }
+
+      .legend {
+        background: #fbfcfe;
+        border-bottom: 1px solid var(--line);
+        flex: 0 0 auto;
+        display: grid;
+        gap: 8px;
+        padding: 18px 18px 16px;
+        z-index: 2;
+      }
+
+      .legend h3 {
+        font-size: 13px;
+        margin: 0 0 2px;
+        text-transform: uppercase;
+        color: var(--ink);
+      }
+
+      .mode-note {
+        background: #eef5f7;
+        border: 1px solid #d4e5ea;
+        border-radius: 8px;
+        color: #3e5b66;
+        font-size: 13px;
+        line-height: 1.5;
+        margin-top: 16px;
+        padding: 12px;
+      }
+
+      .legend-item {
+        align-items: center;
+        color: var(--muted);
+        display: flex;
+        font-size: 13px;
+        gap: 8px;
+      }
+
+      .swatch {
+        border-radius: 50%;
+        display: inline-block;
+        height: 12px;
+        width: 12px;
+      }
+
+      .link {
+        stroke: #aab8c5;
+        stroke-opacity: 0.36;
+      }
+
+      .link-hit {
+        cursor: pointer;
+        pointer-events: stroke;
+        stroke: transparent;
+        stroke-width: 12px;
+      }
+
+      .link.is-selected {
+        stroke: var(--blue);
+        stroke-opacity: 0.9;
+        stroke-width: 2.2px;
+      }
+
+      .node {
+        cursor: pointer;
+      }
+
+      .node.is-selected circle {
+        stroke: var(--ink);
+        stroke-width: 2.5px;
+      }
+
+      .node text {
+        fill: #233140;
+        font-size: 11px;
+        paint-order: stroke;
+        pointer-events: none;
+        stroke: white;
+        stroke-width: 3px;
+      }
+
+      .node text.external-label {
+        font-size: 10.5px;
+        font-weight: 700;
+      }
+
+      .node text.external-label .affiliation {
+        fill: #64748b;
+        font-size: 9.5px;
+        font-weight: 600;
+      }
+
+      .empty {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--muted);
+        display: flex;
+        font-size: 13px;
+        font-weight: 600;
+        left: 18px;
+        justify-content: center;
+        max-width: min(320px, calc(100% - 36px));
+        padding: 10px 12px;
+        position: absolute;
+        top: 62px;
+        text-align: center;
+      }
+
+      .empty[hidden] {
+        display: none;
+      }
+
+      @media (max-width: 920px) {
+        .intro,
+        .network-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .details {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+          height: auto;
+          max-height: none;
+          overflow: visible;
+        }
+
+        #detail-content {
+          overflow: visible;
+        }
+
+        svg,
+        .canvas-wrap {
+          min-height: 580px;
+          height: 580px;
+        }
+
+        .mode-control {
+          flex-direction: column;
+        }
+
+        .mode-control button + button {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+        }
+
+        .search-row {
+          grid-template-columns: 1fr;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a class="brand" href="index.html#home">Design Sciences Laboratory</a>
+        <nav aria-label="Primary navigation">
+          <a href="index.html#home">Home</a>
+          <a href="news.html">News</a>
+          <a href="index.html#research">Research</a>
+          <a href="pages/personal.ntu.edu.sg_skmoon_people.html">People</a>
+          <a href="publications.html">Publications</a>
+          <a href="collaboration-network.html" aria-current="page">Network</a>
+          <a href="index.html#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <h1>Researcher, publication, and institution network</h1>
+        </div>
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="toolbar" aria-label="Network controls">
+        <div class="mode-control" aria-label="Relationship depth">
+          <button type="button" data-mode="lab-publications" aria-pressed="true">Internal Researcher Network</button>
+          <button type="button" data-mode="collaborators" aria-pressed="false">Internal-External Researcher Network</button>
+        </div>
+        <div class="search-row">
+          <input id="search" type="search" placeholder="Search names, titles, institutions" aria-label="Search graph">
+          <select id="year" aria-label="Filter by year">
+            <option value="">All years</option>
+          </select>
+        </div>
+        <div class="filters filter-row" aria-label="Node filters">
+          <button type="button" data-filter="all" aria-pressed="true">Overview</button>
+          <button type="button" data-filter="recent">Recent Publications</button>
+          <button type="button" data-filter="external">External Co-authors</button>
+          <button type="button" data-filter="institutions">Key Institutions</button>
+        </div>
+      </section>
+
+      <section class="network-shell">
+        <div class="canvas-wrap">
+          <div class="zoom-controls" aria-label="Graph zoom controls">
+            <button type="button" id="zoom-reset" title="Reset graph view">Reset view</button>
+          </div>
+          <svg id="network" role="img" aria-label="Collaboration network graph"></svg>
+          <div class="empty" id="empty" hidden>No matching nodes.</div>
+        </div>
+        <aside class="details" id="details">
+          <div class="legend">
+            <h3>Node colors</h3>
+            <div class="legend-item"><span class="swatch" style="background:#2f4b7c"></span>Internal researcher</div>
+            <div class="legend-item"><span class="swatch" style="background:#c45a4a"></span>External researcher</div>
+            <div class="legend-item"><span class="swatch" style="background:#168c7c"></span>Publication</div>
+            <div class="legend-item"><span class="swatch" style="background:#b58a2a"></span>Institution</div>
+          </div>
+          <div id="detail-content">
+            <h2>Select a node</h2>
+            <p>Use the relationship-depth buttons to switch between the lab publication map and the expanded co-author network.</p>
+            <div class="mode-note" id="mode-note">Showing only DSL members and the publications connected to them.</div>
+          </div>
+        </aside>
+      </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script>
+      const colors = {
+        Person: "#2f4b7c",
+        ExternalResearcher: "#c45a4a",
+        Publication: "#168c7c",
+        Institution: "#b58a2a"
+      };
+
+      const radii = {
+        Person: 8,
+        ExternalResearcher: 5,
+        Publication: 4,
+        Institution: 7
+      };
+
+      const state = {
+        data: null,
+        mode: "lab-publications",
+        filter: "all",
+        search: "",
+        year: ""
+      };
+
+      const svg = d3.select("#network");
+      const details = document.querySelector("#details");
+      const detailContent = document.querySelector("#detail-content");
+      const empty = document.querySelector("#empty");
+      const stats = document.querySelector("#stats");
+      const search = document.querySelector("#search");
+      const year = document.querySelector("#year");
+      const modeNote = document.querySelector("#mode-note");
+      const zoomReset = document.querySelector("#zoom-reset");
+
+      function nodeLabel(node) {
+        return node.label || node.id;
+      }
+
+      function edgeEndpointId(endpoint) {
+        return typeof endpoint === "object" && endpoint !== null ? endpoint.id : endpoint;
+      }
+
+      function truncateLabel(value, length = 30) {
+        const label = value || "";
+        return label.length > length ? `${label.slice(0, length - 3)}...` : label;
+      }
+
+      function primaryAffiliation(node) {
+        return (state.data.affiliationsByAuthor.get(node.id) || [])[0] || "";
+      }
+
+      function metric(node, key) {
+        return (state.data.metricsByNode.get(node.id) || {})[key] || 0;
+      }
+
+      function nodeRadius(node) {
+        const base = radii[node.type] || 5;
+        if (node.type !== "Person" && node.type !== "ExternalResearcher") return base;
+        const publicationCount = metric(node, "publicationCount");
+        const maxCount = state.data.maxPublicationCountByType.get(node.type) || publicationCount || 1;
+        const scale = Math.sqrt(publicationCount || 1) / Math.sqrt(maxCount);
+        const range = node.type === "Person" ? [8, 24] : [5, 18];
+        return range[0] + (range[1] - range[0]) * scale;
+      }
+
+      function isRecentPublication(node) {
+        return node.type === "Publication" && Number(node.year) >= 2021;
+      }
+
+      function visibleNode(node) {
+        const term = state.search.trim().toLowerCase();
+        const text = [node.label, node.id, node.doi, node.openalex_id, node.year].filter(Boolean).join(" ").toLowerCase();
+        if (term && !text.includes(term)) return false;
+        if (state.year && node.type === "Publication" && String(node.year) !== state.year) return false;
+        if (state.mode === "lab-publications" && node.type !== "Person" && node.type !== "Publication") return false;
+        if (state.mode === "collaborators" && node.type === "Institution" && state.filter !== "institutions") return false;
+        if (state.filter === "institutions") return node.type === "Institution"
+          ? metric(node, "publicationCount") >= 3
+          : node.type === "Person" || node.type === "Publication";
+        if (state.filter === "external") return node.type === "ExternalResearcher" || node.type === "Person" || node.type === "Publication";
+        if (state.filter === "recent") return node.type !== "Publication" || isRecentPublication(node);
+        return true;
+      }
+
+      function modeEdge(edge, visibleIds) {
+        const sourceId = edgeEndpointId(edge.source);
+        const targetId = edgeEndpointId(edge.target);
+        const source = state.data.nodeById.get(sourceId);
+        const target = state.data.nodeById.get(targetId);
+        if (!source || !target) return false;
+        if (state.mode === "lab-publications") {
+          return edge.type === "authored" &&
+            visibleIds.has(sourceId) &&
+            visibleIds.has(targetId) &&
+            ((source.type === "Person" && target.type === "Publication") ||
+              (source.type === "Publication" && target.type === "Person"));
+        }
+        if (state.mode === "collaborators" && state.filter !== "institutions") {
+          return edge.type === "authored" &&
+            visibleIds.has(sourceId) &&
+            visibleIds.has(targetId) &&
+            (source.type === "Person" || source.type === "ExternalResearcher" || source.type === "Publication") &&
+            (target.type === "Person" || target.type === "ExternalResearcher" || target.type === "Publication");
+        }
+        return visibleIds.has(sourceId) && visibleIds.has(targetId);
+      }
+
+      function inducedGraph(data) {
+        const visibleIds = new Set(data.nodes.filter(visibleNode).map(node => node.id));
+        const links = data.edges
+          .filter(edge => modeEdge(edge, visibleIds))
+          .map(edge => ({...edge}));
+        const linkedIds = new Set();
+        links.forEach(link => {
+          linkedIds.add(edgeEndpointId(link.source));
+          linkedIds.add(edgeEndpointId(link.target));
+        });
+        const nodes = data.nodes
+          .filter(node => visibleIds.has(node.id) && (linkedIds.has(node.id) || node.type === "Person"))
+          .map(node => ({...node}));
+        return {nodes, links};
+      }
+
+      function showDetails(node) {
+        const rows = [];
+        if (node.year) rows.push(`<p><strong>Year</strong><br>${node.year}</p>`);
+        if (node.role) rows.push(`<p><strong>Role</strong><br>${node.role}</p>`);
+        if (node.doi_url) rows.push(`<p><strong>DOI</strong><br><a href="${node.doi_url}" target="_blank" rel="noreferrer">${node.doi}</a></p>`);
+        if (node.openalex_id) rows.push(`<p><strong>OpenAlex</strong><br><a href="${node.openalex_id}" target="_blank" rel="noreferrer">${node.openalex_id}</a></p>`);
+        if (node.openalex_ids && node.openalex_ids.length > 1) {
+          rows.push(`<p><strong>Merged OpenAlex IDs</strong><br>${node.openalex_ids.map(id => `<a href="${id}" target="_blank" rel="noreferrer">${id}</a>`).join("<br>")}</p>`);
+        }
+        if (node.merged_from && node.merged_from.length) rows.push(`<p><strong>Merged nodes</strong><br>${node.merged_from.join("<br>")}</p>`);
+        if (node.country_code) rows.push(`<p><strong>Country</strong><br>${node.country_code}</p>`);
+        if (node.paper_no) rows.push(`<p><strong>Paper No.</strong><br>${node.paper_no}</p>`);
+        if (node.article_no) rows.push(`<p><strong>Article/Page No.</strong><br>${node.article_no}</p>`);
+        if (node.type === "Person" || node.type === "ExternalResearcher") {
+          const affiliations = state.data.affiliationsByAuthor.get(node.id) || [];
+          if (affiliations.length) rows.push(`<p><strong>Affiliation</strong><br>${affiliations.join("<br>")}</p>`);
+          rows.push(renderPersonPublications(node));
+          detailContent.innerHTML = `<h2>${nodeLabel(node)}</h2>${rows.join("")}`;
+          return;
+        }
+        if (node.type === "Publication") {
+          rows.push(renderPublicationAuthors(node));
+        }
+        if (node.type === "Institution") {
+          rows.push(renderInstitutionResearchers(node));
+        }
+        detailContent.innerHTML = `<h2>${nodeLabel(node)}</h2><p>${node.type}</p>${rows.join("")}`;
+        bindDetailAuthorButtons();
+      }
+
+      function publicationUrl(publication) {
+        if (publication.doi_url) return publication.doi_url;
+        if (publication.doi) return `https://doi.org/${publication.doi}`;
+        if (publication.openalex_id) return publication.openalex_id;
+        return "";
+      }
+
+      function renderPersonPublications(node) {
+        const publicationIds = new Set();
+        state.data.edges.forEach(edge => {
+          if (edge.type !== "authored") return;
+          const sourceId = edgeEndpointId(edge.source);
+          const targetId = edgeEndpointId(edge.target);
+          if (sourceId === node.id) publicationIds.add(targetId);
+          if (targetId === node.id) publicationIds.add(sourceId);
+        });
+        const publications = [...publicationIds]
+          .map(id => state.data.nodeById.get(id))
+          .filter(publication => publication && publication.type === "Publication")
+          .sort((a, b) => Number(b.year || 0) - Number(a.year || 0) || nodeLabel(a).localeCompare(nodeLabel(b)));
+
+        if (!publications.length) return `<p><strong>Publications</strong><br>No linked publications.</p>`;
+        const items = publications.map(publication => {
+          const url = publicationUrl(publication);
+          const meta = [publication.year, publication.doi ? `DOI ${publication.doi}` : "", publication.openalex_id ? "OpenAlex available" : ""].filter(Boolean).join(" · ");
+          const title = nodeLabel(publication);
+          const titleHtml = url
+            ? `<a href="${url}" target="_blank" rel="noreferrer">${title}</a>`
+            : `<strong class="publication-title">${title}</strong>`;
+          const links = [
+            publication.doi_url ? `<a href="${publication.doi_url}" target="_blank" rel="noreferrer">DOI</a>` : "",
+            !publication.doi_url && publication.doi ? `<a href="https://doi.org/${publication.doi}" target="_blank" rel="noreferrer">DOI</a>` : "",
+            publication.openalex_id ? `<a href="${publication.openalex_id}" target="_blank" rel="noreferrer">OpenAlex</a>` : ""
+          ].filter(Boolean).join("");
+          return `<li>${titleHtml}<span>${meta}</span>${links ? `<div class="publication-links">${links}</div>` : ""}</li>`;
+        }).join("");
+        return `<div><p><strong>Publications</strong><br>${publications.length} linked publication${publications.length === 1 ? "" : "s"}</p><ul class="publication-detail-list">${items}</ul></div>`;
+      }
+
+      function renderPublicationAuthors(publication) {
+        const authorIds = new Set();
+        state.data.edges.forEach(edge => {
+          if (edge.type !== "authored") return;
+          const sourceId = edgeEndpointId(edge.source);
+          const targetId = edgeEndpointId(edge.target);
+          if (targetId === publication.id) authorIds.add(sourceId);
+          if (sourceId === publication.id) authorIds.add(targetId);
+        });
+        const authors = [...authorIds]
+          .map(id => state.data.nodeById.get(id))
+          .filter(author => author && (author.type === "Person" || author.type === "ExternalResearcher"))
+          .sort((a, b) => {
+            if (a.type !== b.type) return a.type === "Person" ? -1 : 1;
+            return nodeLabel(a).localeCompare(nodeLabel(b));
+          });
+        if (!authors.length) return `<p><strong>Authors</strong><br>No linked authors.</p>`;
+        const items = authors.map(author => {
+          const affiliations = state.data.affiliationsByAuthor.get(author.id) || [];
+          const meta = [author.type === "Person" ? "Internal researcher" : "External researcher", affiliations[0] || ""].filter(Boolean).join(" · ");
+          return `<li><button type="button" data-select-node="${author.id}">${nodeLabel(author)}<span>${meta}</span></button></li>`;
+        }).join("");
+        return `<div><p><strong>Authors</strong><br>${authors.length} linked author${authors.length === 1 ? "" : "s"}</p><ul class="author-detail-list">${items}</ul></div>`;
+      }
+
+      function renderInstitutionResearchers(institution) {
+        const directResearcherIds = new Set();
+
+        state.data.edges.forEach(edge => {
+          const sourceId = edgeEndpointId(edge.source);
+          const targetId = edgeEndpointId(edge.target);
+          if (targetId === institution.id && (edge.type === "affiliated_with" || edge.type === "member_of")) {
+            directResearcherIds.add(sourceId);
+          }
+        });
+
+        const researcherStats = new Map();
+        function ensureResearcher(id) {
+          const researcher = state.data.nodeById.get(id);
+          if (!researcher || (researcher.type !== "Person" && researcher.type !== "ExternalResearcher")) return null;
+          if (!researcherStats.has(id)) {
+            researcherStats.set(id, {node: researcher, publicationCount: 0, direct: false});
+          }
+          return researcherStats.get(id);
+        }
+
+        directResearcherIds.forEach(id => {
+          const stat = ensureResearcher(id);
+          if (stat) stat.direct = true;
+        });
+
+        state.data.edges.forEach(edge => {
+          if (edge.type !== "authored") return;
+          const sourceId = edgeEndpointId(edge.source);
+          const targetId = edgeEndpointId(edge.target);
+          if (!directResearcherIds.has(sourceId)) return;
+          const stat = ensureResearcher(sourceId);
+          if (stat) stat.publicationCount += 1;
+        });
+
+        const researchers = [...researcherStats.values()]
+          .sort((a, b) => {
+            if (b.publicationCount !== a.publicationCount) return b.publicationCount - a.publicationCount;
+            if (a.node.type !== b.node.type) return a.node.type === "Person" ? -1 : 1;
+            return nodeLabel(a.node).localeCompare(nodeLabel(b.node));
+          });
+
+        if (!researchers.length) return `<p><strong>Connected researchers</strong><br>No linked researchers.</p>`;
+        const items = researchers.map(({node, publicationCount, direct}) => {
+          const typeLabel = node.type === "Person" ? "Internal researcher" : "External researcher";
+          const parts = [typeLabel];
+          if (publicationCount) parts.push(`${publicationCount} linked publication${publicationCount === 1 ? "" : "s"}`);
+          if (direct) parts.push("direct affiliation");
+          return `<li><a href="#${node.id}" data-select-node="${node.id}">${nodeLabel(node)}<span>${parts.join(" · ")}</span></a></li>`;
+        }).join("");
+        return `<div><p><strong>Connected researchers</strong><br>${researchers.length} linked researcher${researchers.length === 1 ? "" : "s"}</p><ul class="author-detail-list">${items}</ul></div>`;
+      }
+
+      function selectNodeById(nodeId) {
+        const node = state.data.nodeById.get(nodeId);
+        if (!node) return;
+        if (node.type === "ExternalResearcher" && state.mode !== "collaborators") {
+          state.mode = "collaborators";
+          state.filter = "all";
+          document.querySelectorAll("[data-mode]").forEach(item => {
+            item.setAttribute("aria-pressed", item.dataset.mode === "collaborators" ? "true" : "false");
+          });
+          document.querySelectorAll("[data-filter]").forEach(item => {
+            item.setAttribute("aria-pressed", item.dataset.filter === "all" ? "true" : "false");
+          });
+          render();
+        }
+        svg.selectAll(".is-selected").classed("is-selected", false);
+        svg.selectAll(".node")
+          .filter(d => d.id === nodeId)
+          .classed("is-selected", true);
+        showDetails(node);
+      }
+
+      function bindDetailAuthorButtons() {
+        detailContent.querySelectorAll("[data-select-node]").forEach(button => {
+          button.addEventListener("click", event => {
+            event.preventDefault();
+            selectNodeById(button.dataset.selectNode);
+          });
+        });
+      }
+
+      function showEdgeDetails(edge) {
+        const source = state.data.nodeById.get(edgeEndpointId(edge.source));
+        const target = state.data.nodeById.get(edgeEndpointId(edge.target));
+        const evidence = edge.evidence || {};
+        const rows = [
+          `<p><strong>Source</strong><br>${source ? nodeLabel(source) : edgeEndpointId(edge.source)}</p>`,
+          `<p><strong>Target</strong><br>${target ? nodeLabel(target) : edgeEndpointId(edge.target)}</p>`,
+          `<p><strong>Relationship</strong><br>${edge.type.replaceAll("_", " ")}</p>`
+        ];
+        if (evidence.source) rows.push(`<p><strong>Evidence</strong><br>${evidence.source}</p>`);
+        if (evidence.author) rows.push(`<p><strong>Author string</strong><br>${evidence.author}</p>`);
+        if (evidence.openalex_author_id) rows.push(`<p><strong>OpenAlex author</strong><br><a href="${evidence.openalex_author_id}" target="_blank" rel="noreferrer">${evidence.openalex_author_id}</a></p>`);
+        detailContent.innerHTML = `<h2>Relationship</h2>${rows.join("")}`;
+      }
+
+      function render() {
+        const {nodes, links} = inducedGraph(state.data);
+        const notes = {
+          all: state.mode === "lab-publications"
+            ? "Showing only DSL members and the publications connected to them."
+            : "Showing DSL members, publications, and external co-authors.",
+          recent: "Showing publications from 2021 onward and their connected researchers.",
+          external: "Showing external co-authors with names and representative affiliations.",
+          institutions: "Showing institutions connected to at least three publications."
+        };
+        modeNote.textContent = notes[state.filter] || notes.all;
+        empty.hidden = nodes.length > 0;
+        svg.selectAll("*").remove();
+
+        const width = svg.node().clientWidth || 900;
+        const height = svg.node().clientHeight || 720;
+        svg.attr("viewBox", [0, 0, width, height]);
+
+        const viewport = svg.append("g").attr("class", "graph-viewport");
+        const zoomBehavior = d3.zoom()
+          .scaleExtent([0.35, 4])
+          .filter(event => {
+            if (event.type === "wheel") return true;
+            return !event.target.closest(".node") && !event.target.closest(".link-hit");
+          })
+          .on("zoom", event => {
+            viewport.attr("transform", event.transform);
+          });
+        svg.call(zoomBehavior);
+        zoomReset.onclick = () => {
+          svg.transition()
+            .duration(220)
+            .call(zoomBehavior.transform, d3.zoomIdentity);
+        };
+
+        const simulation = d3.forceSimulation(nodes)
+          .force("link", d3.forceLink(links).id(d => d.id).distance(d => d.type === "affiliated_with" ? 58 : 76).strength(0.42))
+          .force("charge", d3.forceManyBody().strength(d => d.type === "Institution" ? -160 : -58))
+          .force("center", d3.forceCenter(width / 2, height / 2))
+          .force("collide", d3.forceCollide(d => nodeRadius(d) + 4));
+
+        const link = viewport.append("g")
+          .selectAll("line")
+          .data(links)
+          .join("line")
+          .attr("class", "link")
+          .attr("stroke-width", d => d.type === "member_of" ? 1.4 : 0.9);
+
+        const linkHit = viewport.append("g")
+          .selectAll("line")
+          .data(links)
+          .join("line")
+          .attr("class", "link-hit")
+          .on("click", (event, d) => {
+            event.stopPropagation();
+            svg.selectAll(".is-selected").classed("is-selected", false);
+            d3.select(event.currentTarget).classed("is-selected", true);
+            link.filter(item => item === d).classed("is-selected", true);
+            showEdgeDetails(d);
+          });
+
+        const node = viewport.append("g")
+          .selectAll("g")
+          .data(nodes)
+          .join("g")
+          .attr("class", "node")
+          .call(d3.drag()
+            .on("start", (event, d) => {
+              if (!event.active) simulation.alphaTarget(0.25).restart();
+              d.fx = d.x;
+              d.fy = d.y;
+            })
+            .on("drag", (event, d) => {
+              d.fx = event.x;
+              d.fy = event.y;
+            })
+            .on("end", (event, d) => {
+              if (!event.active) simulation.alphaTarget(0);
+              d.fx = null;
+              d.fy = null;
+            }));
+
+        node.append("circle")
+          .attr("r", d => nodeRadius(d))
+          .attr("fill", d => colors[d.type] || "#64748b")
+          .attr("stroke", "#fff")
+          .attr("stroke-width", 1.6);
+
+        node
+          .filter(d => d.type === "Person" || d.type === "Institution")
+          .append("text")
+          .attr("x", d => nodeRadius(d) + 4)
+          .attr("y", 4)
+          .text(d => nodeLabel(d).length > 34 ? `${nodeLabel(d).slice(0, 31)}...` : nodeLabel(d));
+
+        const externalLabel = node
+          .filter(d => d.type === "ExternalResearcher" && state.filter === "external")
+          .append("text")
+          .attr("class", "external-label")
+          .attr("x", d => nodeRadius(d) + 4)
+          .attr("y", -2);
+
+        externalLabel
+          .append("tspan")
+          .attr("x", d => nodeRadius(d) + 4)
+          .attr("dy", 0)
+          .text(d => truncateLabel(nodeLabel(d), 26));
+
+        externalLabel
+          .append("tspan")
+          .attr("class", "affiliation")
+          .attr("x", d => nodeRadius(d) + 4)
+          .attr("dy", 12)
+          .text(d => truncateLabel(primaryAffiliation(d), 30));
+
+        node.on("click", (event, d) => {
+          event.stopPropagation();
+          svg.selectAll(".is-selected").classed("is-selected", false);
+          d3.select(event.currentTarget).classed("is-selected", true);
+          showDetails(d);
+        });
+
+        svg.on("click", () => {
+          svg.selectAll(".is-selected").classed("is-selected", false);
+        });
+
+        simulation.on("tick", () => {
+          link
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+          linkHit
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
+          node.attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+      }
+
+      function renderStats(data) {
+        const items = [
+          ["Publications", data.stats.publications],
+          ["External researchers", data.stats.external_researchers],
+          ["Institutions", data.stats.institutions],
+          ["DOIs found", data.stats.doi_count]
+        ];
+        stats.innerHTML = items.map(([label, value]) => `<div class="stat"><strong>${value}</strong><span>${label}</span></div>`).join("");
+      }
+
+      async function init() {
+        const response = await fetch("collaboration-network.json");
+        state.data = await response.json();
+        state.data.nodeById = new Map(state.data.nodes.map(node => [node.id, node]));
+        state.data.affiliationsByAuthor = new Map();
+        state.data.metricsByNode = new Map();
+        state.data.edges.forEach(edge => {
+          if (edge.type !== "affiliated_with") return;
+          const source = state.data.nodeById.get(edge.source);
+          const target = state.data.nodeById.get(edge.target);
+          if (!source || !target || target.type !== "Institution") return;
+          const affiliations = state.data.affiliationsByAuthor.get(source.id) || [];
+          if (!affiliations.includes(target.label)) affiliations.push(target.label);
+          state.data.affiliationsByAuthor.set(source.id, affiliations);
+        });
+        state.data.edges.forEach(edge => {
+          const source = state.data.nodeById.get(edge.source);
+          const target = state.data.nodeById.get(edge.target);
+          if (!source || !target) return;
+          if (edge.type === "authored" && target.type === "Publication") {
+            const sourceMetrics = state.data.metricsByNode.get(source.id) || {};
+            sourceMetrics.publicationCount = (sourceMetrics.publicationCount || 0) + 1;
+            state.data.metricsByNode.set(source.id, sourceMetrics);
+          }
+          if (edge.type === "associated_institution" && source.type === "Publication") {
+            const targetMetrics = state.data.metricsByNode.get(target.id) || {};
+            targetMetrics.publicationCount = (targetMetrics.publicationCount || 0) + 1;
+            state.data.metricsByNode.set(target.id, targetMetrics);
+          }
+        });
+        state.data.maxPublicationCountByType = new Map();
+        state.data.nodes.forEach(node => {
+          if (node.type !== "Person" && node.type !== "ExternalResearcher") return;
+          const current = state.data.maxPublicationCountByType.get(node.type) || 0;
+          state.data.maxPublicationCountByType.set(node.type, Math.max(current, metric(node, "publicationCount")));
+        });
+        renderStats(state.data);
+
+        const years = [...new Set(state.data.nodes.filter(node => node.type === "Publication").map(node => node.year))].sort((a, b) => Number(b) - Number(a));
+        year.insertAdjacentHTML("beforeend", years.map(value => `<option value="${value}">${value}</option>`).join(""));
+
+        document.querySelectorAll("[data-mode]").forEach(button => {
+          button.addEventListener("click", () => {
+            document.querySelectorAll("[data-mode]").forEach(item => item.setAttribute("aria-pressed", "false"));
+            button.setAttribute("aria-pressed", "true");
+            state.mode = button.dataset.mode;
+            state.filter = "all";
+            document.querySelectorAll("[data-filter]").forEach(item => {
+              item.setAttribute("aria-pressed", item.dataset.filter === "all" ? "true" : "false");
+            });
+            render();
+          });
+        });
+
+        document.querySelectorAll("[data-filter]").forEach(button => {
+          button.addEventListener("click", () => {
+            document.querySelectorAll("[data-filter]").forEach(item => item.setAttribute("aria-pressed", "false"));
+            button.setAttribute("aria-pressed", "true");
+            state.filter = button.dataset.filter;
+            if (state.filter === "external" || state.filter === "institutions") {
+              state.mode = "collaborators";
+              document.querySelectorAll("[data-mode]").forEach(item => {
+                item.setAttribute("aria-pressed", item.dataset.mode === "collaborators" ? "true" : "false");
+              });
+            }
+            render();
+          });
+        });
+
+        search.addEventListener("input", () => {
+          state.search = search.value;
+          render();
+        });
+
+        year.addEventListener("change", () => {
+          state.year = year.value;
+          render();
+        });
+
+        render();
+      }
+
+      init().catch(error => {
+        empty.hidden = false;
+        empty.textContent = `Could not load collaboration-network.json: ${error.message}`;
+      });
+    </script>
+  </body>
+</html>
