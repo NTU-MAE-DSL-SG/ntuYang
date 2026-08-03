@@ -3575,3 +3575,171 @@ address {
     animation: none;
   }
 }
+
+/* =========================================================
+   Research cards: overlay the Overview card and feature cards
+   The expanded card stays inside .research-overview-grid-composed,
+   so it ends immediately above the Selected programme strip.
+   ========================================================= */
+
+/* Use the complete Overview + four-card block as the overlay boundary. */
+.research-overview-grid-composed {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+}
+
+/* Keep the normal Overview card and feature cards below the active overlay. */
+.research-overview-grid-composed > .research-overview-card,
+.research-overview-grid-composed > .research-feature-grid-expandable {
+  z-index: 1;
+}
+
+/* Remove this nested grid as the absolute-positioning boundary.
+   The hovered card will therefore use .research-overview-grid-composed. */
+.research-overview-grid-composed > .research-feature-grid-expandable {
+  position: static;
+}
+
+/* Expand the selected research direction across both the Overview card
+   and the four-card area without changing the page layout. */
+.research-overview-grid-composed
+  .research-feature-grid-expandable
+  .research-feature-card:hover,
+.research-overview-grid-composed
+  .research-feature-grid-expandable
+  .research-feature-card:focus-visible,
+.research-overview-grid-composed
+  .research-feature-grid-expandable
+  .research-feature-card:focus-within {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  padding: clamp(32px, 4vw, 54px);
+
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(420px, 1.28fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+
+  overflow: hidden;
+  transform: none;
+  border-color: rgba(47, 87, 72, 0.32);
+  background: rgba(250, 248, 242, 0.985);
+  box-shadow: 0 30px 72px rgba(23, 32, 42, 0.18);
+}
+
+/* Give the summary and detail enough horizontal space in the full overlay. */
+.research-overview-grid-composed
+  .research-feature-card:hover
+  .research-feature-summary,
+.research-overview-grid-composed
+  .research-feature-card:focus-visible
+  .research-feature-summary,
+.research-overview-grid-composed
+  .research-feature-card:focus-within
+  .research-feature-summary {
+  align-self: center;
+  padding-right: clamp(28px, 4vw, 54px);
+  border-right: 1px solid rgba(47, 87, 72, 0.2);
+}
+
+.research-overview-grid-composed
+  .research-feature-card:hover
+  .research-feature-detail,
+.research-overview-grid-composed
+  .research-feature-card:focus-visible
+  .research-feature-detail,
+.research-overview-grid-composed
+  .research-feature-card:focus-within
+  .research-feature-detail {
+  display: block;
+  align-self: center;
+  max-width: 760px;
+  animation: research-detail-enter 240ms ease both;
+}
+
+/* Use a wider list layout because the overlay now includes the Overview area. */
+.research-overview-grid-composed
+  .research-feature-card:hover
+  .research-feature-detail ul,
+.research-overview-grid-composed
+  .research-feature-card:focus-visible
+  .research-feature-detail ul,
+.research-overview-grid-composed
+  .research-feature-card:focus-within
+  .research-feature-detail ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .research-overview-grid-composed
+    .research-feature-grid-expandable
+    .research-feature-card:hover,
+  .research-overview-grid-composed
+    .research-feature-grid-expandable
+    .research-feature-card:focus-visible,
+  .research-overview-grid-composed
+    .research-feature-grid-expandable
+    .research-feature-card:focus-within {
+    padding: 30px;
+    grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.2fr);
+    gap: 30px;
+  }
+
+  .research-overview-grid-composed
+    .research-feature-card:hover
+    .research-feature-detail ul,
+  .research-overview-grid-composed
+    .research-feature-card:focus-visible
+    .research-feature-detail ul,
+  .research-overview-grid-composed
+    .research-feature-card:focus-within
+    .research-feature-detail ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Touch/mobile layouts keep the details in normal document flow. */
+@media (hover: none), (max-width: 720px) {
+  .research-overview-grid-composed > .research-feature-grid-expandable {
+    position: relative;
+  }
+
+  .research-overview-grid-composed
+    .research-feature-grid-expandable
+    .research-feature-card:hover,
+  .research-overview-grid-composed
+    .research-feature-grid-expandable
+    .research-feature-card:focus-visible,
+  .research-overview-grid-composed
+    .research-feature-grid-expandable
+    .research-feature-card:focus-within {
+    position: relative;
+    inset: auto;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: 28px;
+    display: block;
+    overflow: visible;
+    box-shadow: none;
+  }
+
+  .research-overview-grid-composed
+    .research-feature-card:hover
+    .research-feature-summary,
+  .research-overview-grid-composed
+    .research-feature-card:focus-visible
+    .research-feature-summary,
+  .research-overview-grid-composed
+    .research-feature-card:focus-within
+    .research-feature-summary {
+    padding-right: 0;
+    border-right: 0;
+  }
+}
