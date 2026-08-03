@@ -3892,7 +3892,7 @@ address {
 
 .research-feature-close {
   position: absolute;
-  top: -18px;
+  top: -10px;
   right: 0;
   display: inline-flex;
   align-items: center;
