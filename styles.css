@@ -3892,8 +3892,8 @@ address {
 
 .research-feature-close {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 16px;
+  right: 16px;
   z-index: 50;
   display: inline-flex;
   align-items: center;
