@@ -4419,19 +4419,3 @@ address {
     max-height: none !important;
   }
 }
-
-
-/* =========================================================
-   Header navigation size adjustment
-   ========================================================= */
-
-.theme-ntuyang-refined .brand {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.theme-ntuyang-refined .nav-links a {
-  font-size: 15px;
-  padding: 10px 14px;
-}
-
