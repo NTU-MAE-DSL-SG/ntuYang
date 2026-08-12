@@ -4435,3 +4435,55 @@ address {
   padding: 10px 14px;
 }
 
+
+/* =========================================================
+   Larger header navigation typography and spacing
+   ========================================================= */
+
+.theme-ntuyang-refined .brand {
+  font-size: 25px !important;
+  font-weight: 600;
+}
+
+.theme-ntuyang-refined .nav-links {
+  gap: 24px !important;
+}
+
+.theme-ntuyang-refined .nav-links a {
+  font-size: 22px !important;
+  padding: 12px 16px !important;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   Header brand size and left offset
+   ========================================================= */
+
+.theme-ntuyang-refined .brand {
+  font-size: 30px !important;
+  font-weight: 600;
+  margin-left: 4cm !important;
+}
+
+.theme-ntuyang-refined .nav-links {
+  gap: 24px !important;
+}
+
+.theme-ntuyang-refined .nav-links a {
+  font-size: 22px !important;
+  padding: 12px 16px !important;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   Header brand left offset refinement
+   ========================================================= */
+
+.theme-ntuyang-refined .brand {
+  font-size: 30px !important;
+  font-weight: 600;
+  margin-left: 70px !important;
+}
+
