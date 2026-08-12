@@ -4487,3 +4487,33 @@ address {
   margin-left: 70px !important;
 }
 
+
+/* =========================================================
+   Header layout: center brand in the space before News
+   ========================================================= */
+
+.theme-ntuyang-refined .nav {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  column-gap: 28px !important;
+}
+
+.theme-ntuyang-refined .brand {
+  justify-self: center !important;
+  margin-left: 0 !important;
+  font-size: 30px !important;
+  font-weight: 600;
+}
+
+.theme-ntuyang-refined .nav-links {
+  justify-self: end !important;
+  gap: 24px !important;
+}
+
+.theme-ntuyang-refined .nav-links a {
+  font-size: 22px !important;
+  padding: 12px 16px !important;
+  font-weight: 600;
+}
+
