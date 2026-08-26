@@ -596,7 +596,7 @@
           <button type="button" data-mode="collaborators" aria-pressed="false">Internal-External Researcher Network</button>
         </div>
         <div class="search-row">
-          <input id="search" type="search" placeholder="Search names, titles, institutions" aria-label="Search graph">
+          <input id="search" type="search" placeholder="Search researchers, titles, institutions, keywords" aria-label="Search graph">
           <select id="year" aria-label="Filter by year">
             <option value="">All years</option>
           </select>
@@ -704,10 +704,11 @@
         return node.type === "Publication" && Number(node.year) >= 2021;
       }
 
+      function searchTokens() {
+        return state.search.trim().toLowerCase().split(/\s+/).filter(Boolean);
+      }
+
       function visibleNode(node) {
-        const term = state.search.trim().toLowerCase();
-        const text = [node.label, node.id, node.doi, node.openalex_id, node.year].filter(Boolean).join(" ").toLowerCase();
-        if (term && !text.includes(term)) return false;
         if (state.year && node.type === "Publication" && String(node.year) !== state.year) return false;
         if (state.mode === "lab-publications" && node.type !== "Person" && node.type !== "Publication") return false;
         if (state.mode === "collaborators" && node.type === "Institution" && state.filter !== "institutions") return false;
@@ -743,7 +744,30 @@
       }
 
       function inducedGraph(data) {
-        const visibleIds = new Set(data.nodes.filter(visibleNode).map(node => node.id));
+        const tokens = searchTokens();
+        // Search matches against the full per-node text index (all node fields
+        // plus researcher affiliations), not just labels.
+        const matchedIds = new Set(data.nodes.filter(node => {
+          if (!tokens.length) return true;
+          const text = state.data.searchTextById.get(node.id) || "";
+          return tokens.every(token => text.includes(token));
+        }).map(node => node.id));
+        // Keep one-hop neighbours of matches so results appear with context
+        // (authors of matched publications, publications of matched authors, ...).
+        const neighborIds = new Set();
+        if (tokens.length) {
+          data.edges.forEach(edge => {
+            const sourceId = edgeEndpointId(edge.source);
+            const targetId = edgeEndpointId(edge.target);
+            if (matchedIds.has(sourceId)) neighborIds.add(targetId);
+            if (matchedIds.has(targetId)) neighborIds.add(sourceId);
+          });
+        }
+        const seedIds = tokens.length ? matchedIds : new Set();
+        const searchKept = id => !tokens.length || matchedIds.has(id) || neighborIds.has(id);
+        const visibleIds = new Set(
+          data.nodes.filter(node => searchKept(node.id) && visibleNode(node)).map(node => node.id)
+        );
         const links = data.edges
           .filter(edge => modeEdge(edge, visibleIds))
           .map(edge => ({...edge}));
@@ -753,7 +777,7 @@
           linkedIds.add(edgeEndpointId(link.target));
         });
         const nodes = data.nodes
-          .filter(node => visibleIds.has(node.id) && (linkedIds.has(node.id) || node.type === "Person"))
+          .filter(node => visibleIds.has(node.id) && (linkedIds.has(node.id) || node.type === "Person" || seedIds.has(node.id)))
           .map(node => ({...node}));
         return {nodes, links};
       }
@@ -1116,6 +1140,22 @@
           if (!affiliations.includes(target.label)) affiliations.push(target.label);
           state.data.affiliationsByAuthor.set(source.id, affiliations);
         });
+        // Full-text search index: every field of each node plus researcher
+        // affiliations, so any content in the dataset is discoverable.
+        state.data.searchTextById = new Map(state.data.nodes.map(node => {
+          const parts = [];
+          const push = value => {
+            if (value === null || value === undefined) return;
+            if (Array.isArray(value)) {
+              value.forEach(push);
+              return;
+            }
+            if (typeof value === "string" || typeof value === "number") parts.push(String(value));
+          };
+          Object.values(node).forEach(push);
+          (state.data.affiliationsByAuthor.get(node.id) || []).forEach(affiliation => parts.push(affiliation));
+          return [node.id, parts.join(" ").toLowerCase()];
+        }));
         state.data.edges.forEach(edge => {
           const source = state.data.nodeById.get(edge.source);
           const target = state.data.nodeById.get(edge.target);
